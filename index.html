@@ -4,32 +4,76 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rak Buku</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eef2ee;--ink:#1d2b24;--muted:#5d6b64;--line:#c9d3cb;--pine:#1f4d3a;--brick:#b4452c;--card:#fbfcfa}
+:root{--ink:#f3efe6;--muted:#b9b3a4;--amber:#e9b44c;--glass:rgba(14,20,17,.58);--line:rgba(243,239,230,.18);--serif:"Cormorant Garamond",Georgia,serif}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
-header{background:var(--pine);color:#eef2ee;padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-header h1{margin:0;font-size:22px;letter-spacing:.5px;margin-right:auto}
-header a,header button{color:#eef2ee;background:none;border:0;font:inherit;cursor:pointer;text-decoration:none;padding:4px 2px;border-bottom:2px solid transparent}
-header a:hover,header button:hover,header a.on{border-bottom-color:#e9b44c}
-main{max-width:760px;margin:0 auto;padding:24px 20px 60px}
-h2{margin:0 0 16px;font-size:26px}
-.book{display:block;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--pine);padding:14px 16px;margin-bottom:12px;color:inherit;text-decoration:none}
-.book:hover{border-left-color:var(--brick)}
-.book b{font-size:19px}
-.meta{color:var(--muted);font-size:14px}
-label{display:block;margin:14px 0 4px;font-weight:bold}
-input,textarea,select{width:100%;padding:10px;border:1px solid var(--line);background:#fff;font:inherit;border-radius:2px}
-input:focus,textarea:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid #e9b44c;outline-offset:1px}
-.btn{margin-top:18px;background:var(--brick);color:#fff;border:0;padding:10px 20px;font:inherit;cursor:pointer;border-radius:2px}
-.btn:hover{background:#963821}
-.msg{margin-top:14px;padding:10px 12px;border:1px solid var(--line);background:var(--card)}
-.msg.err{border-color:var(--brick);color:#8a2f1b}
-.msg.ok{border-color:var(--pine);color:var(--pine)}
-.back{display:inline-block;margin-bottom:14px;color:var(--pine)}
+body{margin:0;background:#0b110e;color:var(--ink);font:17px/1.6 Georgia,serif;min-height:100vh}
+#bgv{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+#shade{position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(8,12,10,.62),rgba(8,12,10,.78))}
+header{display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding:14px 22px;background:var(--glass);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header h1{margin:0 auto 0 0;font:italic 700 28px var(--serif);letter-spacing:.5px}
+header a,header button{color:var(--ink);background:none;border:0;font:inherit;cursor:pointer;text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
+header a:hover,header button:hover,header a.on{border-bottom-color:var(--amber)}
+main{max-width:860px;margin:0 auto;padding:26px 20px 70px}
+h2{margin:0 0 14px;font:700 34px var(--serif)}
+.glass{background:var(--glass);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:4px}
+.book{display:block;padding:14px 18px;margin-bottom:12px;color:inherit;text-decoration:none;border-left:4px solid var(--amber)}
+.book:hover{background:rgba(30,40,34,.7)}
+.book b{font:700 22px var(--serif)}
+.meta{color:var(--muted);font-size:15px}
+.back{display:inline-block;margin-bottom:12px;color:var(--amber)}
+label{display:block;margin:14px 0 4px}
+input,textarea,select{width:100%;padding:10px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);font:inherit;border-radius:3px}
+select option{color:#111}
+input:focus,textarea:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--amber);outline-offset:1px}
+.btn{margin-top:18px;background:var(--amber);color:#1a1405;border:0;padding:10px 22px;font:700 17px Georgia,serif;cursor:pointer;border-radius:3px;width:100%}
+.btn:hover{filter:brightness(1.08)}
+.acts{display:flex;gap:10px;margin-top:16px}
+.btn2{background:none;border:1px solid var(--amber);color:var(--amber);padding:8px 18px;font:inherit;cursor:pointer;border-radius:3px;text-decoration:none}
+.btn2:hover{background:var(--amber);color:#1a1405}
+.btn2.del{border-color:#e0674b;color:#ffb4a2}
+.btn2.del:hover{background:#e0674b;color:#fff}
+.msg{margin-top:14px;padding:10px 12px;border:1px solid var(--line);background:var(--glass)}
+.msg.err{border-color:#e0674b;color:#ffb4a2}
+.msg.ok{border-color:var(--amber);color:var(--amber)}
+
+/* polaroid */
+.pol{background:#f6f2e9;padding:10px 10px 34px;box-shadow:0 12px 30px rgba(0,0,0,.55);color:#222;font:italic 500 17px var(--serif);text-align:center;position:relative}
+.pol img{display:block;width:100%;height:100%;object-fit:cover}
+.pol span{position:absolute;left:0;right:0;bottom:7px}
+
+/* login */
+.login{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;min-height:72vh}
+.stack{position:relative;height:430px;max-width:300px;margin:0 auto;width:100%}
+.stack .pol{position:absolute;inset:0;opacity:0;animation:cycle 15s infinite}
+.stack .pol:nth-child(1){--r:-4deg;animation-delay:0s}
+.stack .pol:nth-child(2){--r:3deg;animation-delay:5s}
+.stack .pol:nth-child(3){--r:-2deg;animation-delay:10s}
+.stack .pol img{height:calc(100% - 0px)}
+@keyframes cycle{0%{opacity:0;transform:rotate(var(--r)) translateY(30px) scale(.96)}6%,30%{opacity:1;transform:rotate(var(--r)) translateY(0) scale(1)}36%,100%{opacity:0;transform:rotate(var(--r)) translateY(-24px) scale(1.02)}}
+.tag{font:italic 500 30px/1.25 var(--serif);min-height:2.6em;margin:0 0 18px}
+.tag::after{content:"|";margin-left:3px;color:var(--amber);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.card{padding:6px 24px 24px;animation:rise .9s ease-out both}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* hero on other pages */
+.hero{display:flex;gap:22px;align-items:center;margin-bottom:22px}
+.hero .pol{width:118px;height:150px;flex:none;padding:6px 6px 24px;animation:float 6s ease-in-out infinite;transform:rotate(-3deg)}
+.hero .pol span{font-size:13px;bottom:4px}
+.hero p{margin:0;font:italic 500 24px/1.3 var(--serif);color:var(--muted)}
+@keyframes float{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(2deg) translateY(-10px)}}
+
+@media (max-width:720px){.login{grid-template-columns:1fr}.stack{height:340px;max-width:240px}}
+@media (prefers-reduced-motion:reduce){.stack .pol,.hero .pol,.card,.tag::after{animation:none}.stack .pol:first-child{opacity:1}}
 </style>
 </head>
 <body>
+<video id="bgv" src="bg.mp4" autoplay muted loop playsinline></video>
+<div id="shade"></div>
 <header>
   <h1>Rak Buku</h1>
   <a href="#/books" id="n-books">Buku</a>
@@ -43,6 +87,7 @@ input:focus,textarea:focus,select:focus,button:focus-visible,a:focus-visible{out
 <script>
 const API = "http://localhost:3000";
 const app = document.getElementById("app");
+const LINES = ["setiap buku, satu cerita.","malam, lampu kota, dan halaman yang belum dibaca.","pelan-pelan saja, ceritanya masih panjang."];
 
 function getToken(){ try { return localStorage.getItem("token"); } catch(e){ return null; } }
 function setToken(t){ try { t ? localStorage.setItem("token", t) : localStorage.removeItem("token"); } catch(e){} }
@@ -63,51 +108,113 @@ function updateNav(){
   document.getElementById("n-login").hidden = on;
   document.getElementById("n-logout").hidden = !on;
   const hash = location.hash || "#/books";
-  ["books","authors","add","login"].forEach(k => {
-    document.getElementById("n-" + k).classList.toggle("on", hash.startsWith("#/" + k));
-  });
+  ["books","authors","add","login"].forEach(k => document.getElementById("n-" + k).classList.toggle("on", hash.startsWith("#/" + k)));
 }
-
 document.getElementById("n-logout").onclick = () => { setToken(null); location.hash = "#/login"; route(); };
 
+function hero(img, cap, text){
+  return `<div class="hero"><div class="pol"><img src="${img}" alt=""><span>${cap}</span></div><p>${text}</p></div>`;
+}
+
+let typer;
+function typeLines(el){
+  clearInterval(typer);
+  let li = 0, ci = 0, del = false, wait = 0;
+  typer = setInterval(() => {
+    if (!document.body.contains(el)) { clearInterval(typer); return; }
+    if (wait > 0) { wait--; return; }
+    const line = LINES[li];
+    if (!del) { ci++; if (ci >= line.length) { del = true; wait = 22; } }
+    else { ci -= 2; if (ci <= 0) { ci = 0; del = false; li = (li + 1) % LINES.length; wait = 4; } }
+    el.firstChild.nodeValue = line.slice(0, ci);
+  }, 55);
+}
+
 async function viewBooks(){
-  app.innerHTML = "<h2>Daftar buku</h2><p class='meta'>Memuat buku...</p>";
+  app.innerHTML = hero("foto2.jpg","halaman satu","pilih satu cerita, lalu biarkan malam menemanimu.") + "<h2>Daftar buku</h2><p class='meta'>Memuat buku...</p>";
   const { data } = await api("/books");
-  app.innerHTML = "<h2>Daftar buku</h2>" + (data.length ? data.map(b =>
-    `<a class="book" href="#/books/${esc(b.slug)}"><b>${esc(b.title)}</b><div class="meta">${b.year ? esc(b.year) : "Tahun belum diisi"}</div></a>`
+  app.innerHTML = hero("foto2.jpg","halaman satu","pilih satu cerita, lalu biarkan malam menemanimu.") + "<h2>Daftar buku</h2>" + (data.length ? data.map(b =>
+    `<a class="book glass" href="#/books/${esc(b.slug)}"><b>${esc(b.title)}</b><div class="meta">${b.year ? esc(b.year) : "Tahun belum diisi"}</div></a>`
   ).join("") : "<p>Belum ada buku. Tambah buku pertama lewat menu Tambah buku.</p>");
 }
 
 async function viewBook(slug){
   app.innerHTML = "<p class='meta'>Memuat detail buku...</p>";
   const { data } = await api("/books/" + encodeURIComponent(slug));
+  const acts = getToken() ? `<div class="acts"><a class="btn2" href="#/edit/${esc(data.slug)}">Edit buku</a><button class="btn2 del" id="del">Hapus buku</button></div>` : "";
   app.innerHTML = `<a class="back" href="#/books">Kembali ke daftar</a>
-    <h2>${esc(data.title)}</h2>
+    <div class="glass" style="padding:20px 24px"><h2>${esc(data.title)}</h2>
     <p class="meta">Penulis: ${esc(data.author.name)} | Tahun: ${data.year ? esc(data.year) : "belum diisi"}</p>
-    <p>${data.description ? esc(data.description) : "Deskripsi belum diisi."}</p>`;
+    <p>${data.description ? esc(data.description) : "Deskripsi belum diisi."}</p>${acts}<div id="out"></div></div>`;
+  const del = document.getElementById("del");
+  if (del) del.onclick = async () => {
+    if (!confirm('Hapus buku "' + data.title + '"? Ini nggak bisa dibatalkan.')) return;
+    try {
+      await api("/books/" + data.id, { method: "DELETE" });
+      location.hash = "#/books";
+    } catch (err) { document.getElementById("out").innerHTML = `<div class="msg err">${esc(err.message)}</div>`; }
+  };
+}
+
+async function viewEdit(slug){
+  if (!getToken()){
+    app.innerHTML = `<h2>Edit buku</h2><div class="msg err">Kamu harus masuk dulu. <a href="#/login" style="color:var(--amber)">Masuk di sini</a>.</div>`;
+    return;
+  }
+  const [{ data }, authors] = await Promise.all([api("/books/" + encodeURIComponent(slug)), api("/authors")]);
+  app.innerHTML = `<a class="back" href="#/books/${esc(data.slug)}">Batal</a>
+    <div class="glass" style="padding:6px 24px 24px"><h2 style="margin-top:14px">Edit buku</h2>
+    <form id="f">
+      <label for="title">Judul</label><input id="title" required maxlength="200" value="${esc(data.title)}">
+      <label for="author">Penulis</label>
+      <select id="author">${authors.map(a => `<option value="${esc(a.id)}"${a.id === data.author_id ? " selected" : ""}>${esc(a.name)}</option>`).join("")}</select>
+      <label for="year">Tahun terbit</label><input id="year" type="number" min="1000" max="${new Date().getFullYear()}" value="${data.year ?? ""}">
+      <label for="desc">Deskripsi</label><textarea id="desc" rows="4">${esc(data.description)}</textarea>
+      <button class="btn" type="submit">Simpan perubahan</button>
+    </form><div id="out"></div></div>`;
+  document.getElementById("f").onsubmit = async e => {
+    e.preventDefault();
+    const out = document.getElementById("out");
+    const body = { title: title.value, author_id: author.value, description: desc.value };
+    if (year.value) body.year = Number(year.value);
+    try {
+      const r = await api("/books/" + data.id, { method: "PUT", body: JSON.stringify(body) });
+      location.hash = "#/books/" + r.data.slug;
+    } catch (err) { out.innerHTML = `<div class="msg err">${esc(err.message)}</div>`; }
+  };
 }
 
 async function viewAuthors(){
-  app.innerHTML = "<h2>Penulis</h2><p class='meta'>Memuat penulis...</p>";
+  const h = hero("foto3.jpg","para penulis","di balik tiap halaman, ada seseorang yang begadang.");
+  app.innerHTML = h + "<h2>Penulis</h2><p class='meta'>Memuat penulis...</p>";
   const data = await api("/authors");
-  app.innerHTML = "<h2>Penulis</h2>" + data.map(a =>
-    `<a class="book" href="#/authors/${esc(a.slug)}"><b>${esc(a.name)}</b></a>`).join("");
+  app.innerHTML = h + "<h2>Penulis</h2>" + data.map(a => `<a class="book glass" href="#/authors/${esc(a.slug)}"><b>${esc(a.name)}</b></a>`).join("");
 }
 
 async function viewAuthor(slug){
   const a = await api("/authors/" + encodeURIComponent(slug));
-  app.innerHTML = `<a class="back" href="#/authors">Kembali ke penulis</a>
-    <h2>${esc(a.name)}</h2>
-    ${a.books.length ? a.books.map(b => `<div class="book"><b>${esc(b.title)}</b></div>`).join("") : "<p>Penulis ini belum punya buku.</p>"}`;
+  app.innerHTML = `<a class="back" href="#/authors">Kembali ke penulis</a><h2>${esc(a.name)}</h2>
+    ${a.books.length ? a.books.map(b => `<div class="book glass"><b>${esc(b.title)}</b></div>`).join("") : "<p>Penulis ini belum punya buku.</p>"}`;
 }
 
 function viewLogin(){
-  app.innerHTML = `<h2>Masuk</h2>
-    <form id="f">
-      <label for="email">Email</label><input id="email" type="email" required>
-      <label for="pw">Password</label><input id="pw" type="password" required>
-      <button class="btn" type="submit">Masuk</button>
-    </form><div id="out"></div>`;
+  app.innerHTML = `<div class="login">
+    <div class="stack">
+      <div class="pol"><img src="foto1.jpg" alt=""><span>jalan pulang</span></div>
+      <div class="pol"><img src="foto2.jpg" alt=""><span>lampu kota</span></div>
+      <div class="pol"><img src="foto3.jpg" alt=""><span>sebelum tutup</span></div>
+    </div>
+    <div>
+      <p class="tag" id="tag"> </p>
+      <div class="glass card"><h2>Masuk</h2>
+        <form id="f">
+          <label for="email">Email</label><input id="email" type="email" required>
+          <label for="pw">Password</label><input id="pw" type="password" required>
+          <button class="btn" type="submit">Masuk</button>
+        </form><div id="out"></div>
+      </div>
+    </div></div>`;
+  typeLines(document.getElementById("tag"));
   document.getElementById("f").onsubmit = async e => {
     e.preventDefault();
     const out = document.getElementById("out");
@@ -121,11 +228,11 @@ function viewLogin(){
 
 async function viewAdd(){
   if (!getToken()){
-    app.innerHTML = `<h2>Tambah buku</h2><div class="msg err">Kamu harus masuk dulu. <a href="#/login">Masuk di sini</a>.</div>`;
+    app.innerHTML = `<h2>Tambah buku</h2><div class="msg err">Kamu harus masuk dulu. <a href="#/login" style="color:var(--amber)">Masuk di sini</a>.</div>`;
     return;
   }
   const authors = await api("/authors");
-  app.innerHTML = `<h2>Tambah buku</h2>
+  app.innerHTML = hero("foto1.jpg","catatan baru","tulis satu judul lagi untuk rak malam ini.") + `<div class="glass" style="padding:6px 24px 24px"><h2 style="margin-top:14px">Tambah buku</h2>
     <form id="f">
       <label for="title">Judul</label><input id="title" required maxlength="200">
       <label for="author">Penulis</label>
@@ -133,7 +240,7 @@ async function viewAdd(){
       <label for="year">Tahun terbit</label><input id="year" type="number" min="1000" max="${new Date().getFullYear()}">
       <label for="desc">Deskripsi</label><textarea id="desc" rows="4"></textarea>
       <button class="btn" type="submit">Simpan buku</button>
-    </form><div id="out"></div>`;
+    </form><div id="out"></div></div>`;
   document.getElementById("f").onsubmit = async e => {
     e.preventDefault();
     const out = document.getElementById("out");
@@ -141,7 +248,7 @@ async function viewAdd(){
     if (year.value) body.year = Number(year.value);
     try {
       const r = await api("/books", { method: "POST", body: JSON.stringify(body) });
-      out.innerHTML = `<div class="msg ok">Buku "${esc(r.data.title)}" tersimpan. <a href="#/books/${esc(r.data.slug)}">Lihat detail</a></div>`;
+      out.innerHTML = `<div class="msg ok">Buku "${esc(r.data.title)}" tersimpan. <a href="#/books/${esc(r.data.slug)}" style="color:var(--amber)">Lihat detail</a></div>`;
       e.target.reset();
     } catch (err) { out.innerHTML = `<div class="msg err">${esc(err.message)}</div>`; }
   };
@@ -154,6 +261,7 @@ async function route(){
     if (h[0] === "books" && h[1]) await viewBook(h[1]);
     else if (h[0] === "authors" && h[1]) await viewAuthor(h[1]);
     else if (h[0] === "authors") await viewAuthors();
+    else if (h[0] === "edit" && h[1]) await viewEdit(h[1]);
     else if (h[0] === "add") await viewAdd();
     else if (h[0] === "login") viewLogin();
     else await viewBooks();
